@@ -1,14 +1,16 @@
 package br.com.fiap.Gs.controller;
 
-
 import br.com.fiap.Gs.dto.AbrigoDTO;
 import br.com.fiap.Gs.service.AbrigoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("/abrigos")
@@ -18,9 +20,20 @@ public class AbrigoController {
     private AbrigoService abrigoService;
 
     @GetMapping
-    public ResponseEntity<List<AbrigoDTO>> findAll() {
-        List<AbrigoDTO> abrigos = abrigoService.findAll();
-        return ResponseEntity.ok(abrigos);
+    public ResponseEntity<Page<AbrigoDTO>> listarComPaginacao(
+            @RequestParam(required = false) String nome,
+            @RequestParam(defaultValue = "20") int limit,
+            @RequestParam(defaultValue = "0") int offset,
+            @RequestParam(defaultValue = "id,asc") String sort
+    ) {
+        String[] sortParams = sort.split(",");
+        String sortField = sortParams[0];
+        Sort.Direction direction = (sortParams.length > 1 && sortParams[1].equalsIgnoreCase("desc"))
+                ? Sort.Direction.DESC : Sort.Direction.ASC;
+
+        Pageable pageable = PageRequest.of(offset, limit, Sort.by(direction, sortField));
+        Page<AbrigoDTO> resultado = abrigoService.consultarComPaginacaoENome(nome, pageable);
+        return ResponseEntity.ok(resultado);
     }
 
     @GetMapping("/{id}")

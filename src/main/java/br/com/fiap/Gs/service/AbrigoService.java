@@ -4,10 +4,9 @@ import br.com.fiap.Gs.dto.AbrigoDTO;
 import br.com.fiap.Gs.model.Abrigo;
 import br.com.fiap.Gs.repository.AbrigoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class AbrigoService {
@@ -15,34 +14,20 @@ public class AbrigoService {
     @Autowired
     private AbrigoRepository abrigoRepository;
 
-    public List<AbrigoDTO> findAll() {
-        return abrigoRepository.findAll().stream()
-                .map(abrigo -> new AbrigoDTO(
-                        abrigo.getId(),
-                        abrigo.getNome(),
-                        abrigo.getEndereco(),
-                        abrigo.getLatitude(),
-                        abrigo.getLongitude(),
-                        abrigo.getCapacidadeMaxima(),
-                        abrigo.getCapacidadeAtual(),
-                        abrigo.isAtivo()
-                ))
-                .collect(Collectors.toList());
+    public Page<AbrigoDTO> consultarComPaginacaoENome(String nome, Pageable pageable) {
+        Page<Abrigo> page;
+        if (nome != null && !nome.isBlank()) {
+            page = abrigoRepository.findByNomeContainingIgnoreCase(nome, pageable);
+        } else {
+            page = abrigoRepository.findAll(pageable);
+        }
+        return page.map(this::convertToDTO);
     }
 
     public AbrigoDTO findById(Long id) {
         Abrigo abrigo = abrigoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Abrigo não encontrado"));
-        return new AbrigoDTO(
-                abrigo.getId(),
-                abrigo.getNome(),
-                abrigo.getEndereco(),
-                abrigo.getLatitude(),
-                abrigo.getLongitude(),
-                abrigo.getCapacidadeMaxima(),
-                abrigo.getCapacidadeAtual(),
-                abrigo.isAtivo()
-        );
+        return convertToDTO(abrigo);
     }
 
     public AbrigoDTO create(AbrigoDTO dto) {
@@ -57,16 +42,7 @@ public class AbrigoService {
                 .ativo(dto.isAtivo())
                 .build();
         abrigo = abrigoRepository.save(abrigo);
-        return new AbrigoDTO(
-                abrigo.getId(),
-                abrigo.getNome(),
-                abrigo.getEndereco(),
-                abrigo.getLatitude(),
-                abrigo.getLongitude(),
-                abrigo.getCapacidadeMaxima(),
-                abrigo.getCapacidadeAtual(),
-                abrigo.isAtivo()
-        );
+        return convertToDTO(abrigo);
     }
 
     public AbrigoDTO update(Long id, AbrigoDTO dto) {
@@ -80,22 +56,23 @@ public class AbrigoService {
         abrigo.setCapacidadeAtual(dto.getCapacidadeAtual());
         abrigo.setAtivo(dto.isAtivo());
         abrigo = abrigoRepository.save(abrigo);
-        return new AbrigoDTO(
-                abrigo.getId(),
-                abrigo.getNome(),
-                abrigo.getEndereco(),
-                abrigo.getLatitude(),
-                abrigo.getLongitude(),
-                abrigo.getCapacidadeMaxima(),
-                abrigo.getCapacidadeAtual(),
-                abrigo.isAtivo()
-        );
+        return convertToDTO(abrigo);
     }
 
     public void delete(Long id) {
-        if (!abrigoRepository.existsById(id)) {
-            throw new RuntimeException("Abrigo não encontrado");
-        }
         abrigoRepository.deleteById(id);
+    }
+
+    private AbrigoDTO convertToDTO(Abrigo abrigo) {
+        AbrigoDTO dto = new AbrigoDTO();
+        dto.setId(abrigo.getId());
+        dto.setNome(abrigo.getNome());
+        dto.setEndereco(abrigo.getEndereco());
+        dto.setLatitude(abrigo.getLatitude());
+        dto.setLongitude(abrigo.getLongitude());
+        dto.setCapacidadeMaxima(abrigo.getCapacidadeMaxima());
+        dto.setCapacidadeAtual(abrigo.getCapacidadeAtual());
+        dto.setAtivo(abrigo.isAtivo());
+        return dto;
     }
 }
