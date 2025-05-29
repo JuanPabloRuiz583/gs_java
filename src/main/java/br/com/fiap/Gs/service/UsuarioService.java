@@ -1,10 +1,11 @@
 package br.com.fiap.Gs.service;
 
-import br.com.fiap.Gs.dto.UsuarioDTO;
+import br.com.fiap.Gs.dto.UserCreateDTO;
+import br.com.fiap.Gs.dto.UserDTO;
 import br.com.fiap.Gs.exception.DuplicateResourceException;
 import br.com.fiap.Gs.exception.ResourceNotFoundException;
-import br.com.fiap.Gs.model.Usuario;
-import br.com.fiap.Gs.repository.UsuarioRepository;
+import br.com.fiap.Gs.model.User;
+import br.com.fiap.Gs.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,54 +16,54 @@ import java.util.stream.Collectors;
 public class UsuarioService {
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UserRepository userRepository;
 
-    public List<UsuarioDTO> findAll() {
-        return usuarioRepository.findAll().stream()
-                .map(usuario -> new UsuarioDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getSenha()))
+    public List<UserDTO> findAll() {
+        return userRepository.findAll().stream()
+                .map(user -> new UserDTO(user.getId(), user.getNome(), user.getEmail(), user.getPassword()))
                 .collect(Collectors.toList());
     }
 
-    public UsuarioDTO findById(Long id) {
-        Usuario usuario = usuarioRepository.findById(id)
+    public UserDTO findById(Long id) {
+        User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuário com ID " + id + " não encontrado"));
-        return new UsuarioDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getSenha());
+        return new UserDTO(user.getId(), user.getNome(), user.getEmail(), user.getPassword());
     }
 
-    public UsuarioDTO create(UsuarioDTO dto) {
-        if (usuarioRepository.existsByEmail(dto.getEmail())) {
+    public UserDTO create(UserCreateDTO dto) {
+        if (userRepository.existsByEmail(dto.getEmail())) {
             throw new DuplicateResourceException("O email " + dto.getEmail() + " já está em uso");
         }
 
-        Usuario usuario = Usuario.builder()
-                .id(null) // ID will be auto-generated
+        User user = User.builder()
+                .id(null)
                 .nome(dto.getNome())
                 .email(dto.getEmail())
-                .senha(dto.getSenha())
+                .password(dto.getPassword())
                 .build();
-        usuario = usuarioRepository.save(usuario);
-        return new UsuarioDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getSenha());
+        user = userRepository.save(user);
+        return new UserDTO(user.getId(), user.getNome(), user.getEmail(), null);
     }
 
-    public UsuarioDTO update(Long id, UsuarioDTO dto) {
-        Usuario usuario = usuarioRepository.findById(id)
+    public UserDTO update(Long id, UserDTO dto) {
+        User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuário com ID " + id + " não encontrado"));
 
-        if (!usuario.getEmail().equals(dto.getEmail()) && usuarioRepository.existsByEmail(dto.getEmail())) {
+        if (!user.getEmail().equals(dto.getEmail()) && userRepository.existsByEmail(dto.getEmail())) {
             throw new DuplicateResourceException("O email " + dto.getEmail() + " já está em uso");
         }
 
-        usuario.setNome(dto.getNome());
-        usuario.setEmail(dto.getEmail());
-        usuario.setSenha(dto.getSenha());
-        usuario = usuarioRepository.save(usuario);
-        return new UsuarioDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getSenha());
+        user.setNome(dto.getNome());
+        user.setEmail(dto.getEmail());
+        user.setPassword(dto.getPassword());
+        user = userRepository.save(user);
+        return new UserDTO(user.getId(), user.getNome(), user.getEmail(), user.getPassword());
     }
 
     public void delete(Long id) {
-        if (!usuarioRepository.existsById(id)) {
+        if (!userRepository.existsById(id)) {
             throw new ResourceNotFoundException("Usuário com ID " + id + " não encontrado");
         }
-        usuarioRepository.deleteById(id);
+        userRepository.deleteById(id);
     }
 }

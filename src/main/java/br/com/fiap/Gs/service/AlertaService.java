@@ -2,9 +2,9 @@ package br.com.fiap.Gs.service;
 
 import br.com.fiap.Gs.dto.AlertaDTO;
 import br.com.fiap.Gs.model.Alerta;
-import br.com.fiap.Gs.model.Usuario;
+import br.com.fiap.Gs.model.User;
 import br.com.fiap.Gs.repository.AlertaRepository;
-import br.com.fiap.Gs.repository.UsuarioRepository;
+import br.com.fiap.Gs.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,14 +18,14 @@ public class AlertaService {
     private AlertaRepository alertaRepository;
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UserRepository userRepository;
 
     public List<AlertaDTO> findAll() {
         return alertaRepository.findAll().stream()
                 .map(alerta -> new AlertaDTO(
                         alerta.getId(),
                         alerta.getDescricao(),
-                        alerta.getDataHora(), // Include dataHora
+                        alerta.getDataHora(),
                         alerta.getLatitude(),
                         alerta.getLongitude(),
                         alerta.getTipoEvento(),
@@ -40,7 +40,7 @@ public class AlertaService {
         return new AlertaDTO(
                 alerta.getId(),
                 alerta.getDescricao(),
-                alerta.getDataHora(), // Include dataHora
+                alerta.getDataHora(),
                 alerta.getLatitude(),
                 alerta.getLongitude(),
                 alerta.getTipoEvento(),
@@ -49,13 +49,13 @@ public class AlertaService {
     }
 
     public AlertaDTO create(AlertaDTO dto) {
-        Usuario usuario = usuarioRepository.findById(dto.getUsuarioId())
+        User usuario = userRepository.findById(dto.getUsuarioId())
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
         Alerta alerta = Alerta.builder()
                 .id(null)
                 .descricao(dto.getDescricao())
-                .dataHora(dto.getDataHora()) // Include dataHora
+                .dataHora(dto.getDataHora())
                 .latitude(dto.getLatitude())
                 .longitude(dto.getLongitude())
                 .tipoEvento(dto.getTipoEvento())
@@ -65,7 +65,7 @@ public class AlertaService {
         return new AlertaDTO(
                 alerta.getId(),
                 alerta.getDescricao(),
-                alerta.getDataHora(), // Include dataHora
+                alerta.getDataHora(),
                 alerta.getLatitude(),
                 alerta.getLongitude(),
                 alerta.getTipoEvento(),
@@ -77,11 +77,11 @@ public class AlertaService {
         Alerta alerta = alertaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Alerta não encontrado"));
 
-        Usuario usuario = usuarioRepository.findById(dto.getUsuarioId())
+        User usuario = userRepository.findById(dto.getUsuarioId())
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
         alerta.setDescricao(dto.getDescricao());
-        alerta.setDataHora(dto.getDataHora()); // Include dataHora
+        alerta.setDataHora(dto.getDataHora());
         alerta.setLatitude(dto.getLatitude());
         alerta.setLongitude(dto.getLongitude());
         alerta.setTipoEvento(dto.getTipoEvento());
@@ -90,7 +90,7 @@ public class AlertaService {
         return new AlertaDTO(
                 alerta.getId(),
                 alerta.getDescricao(),
-                alerta.getDataHora(), // Include dataHora
+                alerta.getDataHora(),
                 alerta.getLatitude(),
                 alerta.getLongitude(),
                 alerta.getTipoEvento(),

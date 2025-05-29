@@ -1,7 +1,5 @@
 package br.com.fiap.Gs.model;
 
-import br.com.fiap.Gs.dto.UsuarioDTO;
-import br.com.fiap.Gs.repository.UsuarioRepository;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,11 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Data

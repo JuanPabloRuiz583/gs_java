@@ -40,8 +40,8 @@ public class Alerta {
 
     @NotNull(message = "O usuário é obrigatório")
     @ManyToOne
-    @JoinColumn(name = "usuario_id", referencedColumnName = "id", nullable = false)
-    private Usuario usuario;
+    @JoinColumn(name = "usuario_id")
+    private User usuario;
 
     @OneToMany(mappedBy = "alerta")
     private List<RotaSegura> rotasSeguras;

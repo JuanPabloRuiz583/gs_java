@@ -2,6 +2,7 @@ package br.com.fiap.Gs.controller;
 
 import br.com.fiap.Gs.dto.AbrigoDTO;
 import br.com.fiap.Gs.service.AbrigoService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,6 +21,10 @@ public class AbrigoController {
     private AbrigoService abrigoService;
 
     @GetMapping
+    @Operation(
+            summary = "Lista abrigos com paginação,ordenação e filtro por nome",
+            description = "Retorna uma página de abrigos, podendo filtrar por nome, limitar quantidade, definir offset e ordenar por campo."
+    )
     public ResponseEntity<Page<AbrigoDTO>> listarComPaginacao(
             @RequestParam(required = false) String nome,
             @RequestParam(defaultValue = "20") int limit,
