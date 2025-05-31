@@ -43,7 +43,10 @@ public class Alerta {
     @JoinColumn(name = "usuario_id")
     private User usuario;
 
-    @OneToMany(mappedBy = "alerta")
+   // @OneToMany(mappedBy = "alerta")
+   // private List<RotaSegura> rotasSeguras;
+
+    @OneToMany(mappedBy = "alerta", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<RotaSegura> rotasSeguras;
 }
 

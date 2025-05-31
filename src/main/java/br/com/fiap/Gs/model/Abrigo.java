@@ -1,14 +1,13 @@
 package br.com.fiap.Gs.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -43,4 +42,7 @@ public class Abrigo {
     private int capacidadeAtual;
 
     private boolean ativo;
+
+    @OneToMany(mappedBy = "abrigo", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<RotaSegura> rotasSeguras;
 }
