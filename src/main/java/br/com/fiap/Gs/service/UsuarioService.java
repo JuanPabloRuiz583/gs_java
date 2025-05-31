@@ -45,25 +45,5 @@ public class UsuarioService {
         return new UserDTO(user.getId(), user.getNome(), user.getEmail(), null);
     }
 
-    public UserDTO update(Long id, UserDTO dto) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Usuário com ID " + id + " não encontrado"));
 
-        if (!user.getEmail().equals(dto.getEmail()) && userRepository.existsByEmail(dto.getEmail())) {
-            throw new DuplicateResourceException("O email " + dto.getEmail() + " já está em uso");
-        }
-
-        user.setNome(dto.getNome());
-        user.setEmail(dto.getEmail());
-        user.setPassword(dto.getPassword());
-        user = userRepository.save(user);
-        return new UserDTO(user.getId(), user.getNome(), user.getEmail(), user.getPassword());
-    }
-
-    public void delete(Long id) {
-        if (!userRepository.existsById(id)) {
-            throw new ResourceNotFoundException("Usuário com ID " + id + " não encontrado");
-        }
-        userRepository.deleteById(id);
-    }
 }

@@ -33,18 +33,7 @@ public class UserController {
 
 
 
-//metodo para criar usuario com senha criptografada
-   // @PostMapping
-    //@Operation(summary = "Cria um novo usuário com a senha criptografada", description = "Cria um usuário com nome, email, senha e role(ADMIN ou USER).")
-    //public User create(@RequestBody @Valid UserCreateDTO dto) {
-      //  User user = User.builder()
-        //        .nome(dto.getNome())
-          //      .email(dto.getEmail())
-            //    .password(passwordEncoder.encode(dto.getPassword()))
-              //  .role(dto.getRole())
-               // .build();
-        //return repository.save(user);
-   // }
+
 
 
     @PostMapping
@@ -74,19 +63,6 @@ public class UserController {
         return ResponseEntity.ok(usuario);
     }
 
-
-
-    @PutMapping("/{id}")
-    public ResponseEntity<UserDTO> update(@PathVariable Long id, @Valid @RequestBody UserDTO dto) {
-        UserDTO updatedUsuario = usuarioService.update(id, dto);
-        return ResponseEntity.ok(updatedUsuario);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        usuarioService.delete(id);
-        return ResponseEntity.noContent().build();
-    }
 
 
 }

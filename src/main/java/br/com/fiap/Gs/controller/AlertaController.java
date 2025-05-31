@@ -3,6 +3,7 @@ package br.com.fiap.Gs.controller;
 import br.com.fiap.Gs.dto.AlertaDTO;
 import br.com.fiap.Gs.service.AlertaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class AlertaController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public AlertaDTO create(@RequestBody AlertaDTO dto) {
         return alertaService.create(dto);
     }
