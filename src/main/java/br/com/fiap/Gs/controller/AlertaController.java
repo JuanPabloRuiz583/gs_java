@@ -37,6 +37,7 @@ public class AlertaController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
         alertaService.delete(id);
     }

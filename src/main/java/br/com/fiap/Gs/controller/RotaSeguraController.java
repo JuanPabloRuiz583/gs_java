@@ -4,6 +4,7 @@ import br.com.fiap.Gs.dto.RotaSeguraDTO;
 import br.com.fiap.Gs.service.RotaSeguraService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,6 +42,7 @@ public class RotaSeguraController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         rotaSeguraService.delete(id);
         return ResponseEntity.noContent().build();
