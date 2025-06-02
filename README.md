@@ -42,15 +42,15 @@ A documentação interativa está disponível via Swagger em  http://localhost:8
 ## 🏁 Como rodar
 
 1. Clone o repositório:
-  ` ``bash
+   ```bash
    git clone https://github.com/JuanPabloRuiz583/gs_java.git
 
 2. Instale as dependências e gere o build:
-  ` ``bash
+   ```bash
    mvn clean install
 
 3.Execute o projeto:
- ` ``bash
+  ```bash
   mvn spring-boot:run
    
 
