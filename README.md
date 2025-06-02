@@ -49,14 +49,37 @@ A documentação interativa está disponível via Swagger em  http://localhost:8
    ```bash
    mvn clean install
 
-3.Execute o projeto:
-  ```bash
-  mvn spring-boot:run
-   
+3. Execute o projeto:
+   ```bash
+   mvn spring-boot:run
 
+## Instruções para acesso e testes
 
+passo 1: Ao rodar todos os endpoints estaram bloqueados exeto o de cadastro de usuarios e de login. Comece cadastrando o usuario, va no post user e crie um usuario:
 
+![passo1](https://github.com/user-attachments/assets/64beda73-7d3f-4b51-af10-ab31a938d4e8)
 
+passo 2: apos criar o usuario, va ate a auth controller no endpoint de login, digite o email e senha de usuario que voce criou
+
+![passo2](https://github.com/user-attachments/assets/58080e37-09a9-4d8c-8c8d-4ae62a995c05)
+
+passo 3: ao digitar suas credenciais corretas no endpoint de login, ele te retornara um token, copia esse token
+
+![passo3](https://github.com/user-attachments/assets/6fc8d2a5-083f-4829-8195-2442bd993894)
+
+passo 4: suba para o topo da tela e clique no cadeado escrito authorize
+
+![passo4](https://github.com/user-attachments/assets/db8b50d4-eab6-499b-ade2-b95e1e66ce0c)
+
+passo 5: ao clicar no cadeado, cole o token que voce copiou e clique em authorize
+
+![passo5](https://github.com/user-attachments/assets/85c4e2ca-6ecc-438c-b327-c912738bc10f)
+
+passo 6: apos isso clique no x , para fechar a janela e volte para a tela principal(voce ira perceber que o cadeado em todas as requisçoes fechou, é sinal que deu certo), sendo assim se voce digitou o token certo todos os endpoints da api estarao liberados para voce testar
+
+![tela6](https://github.com/user-attachments/assets/f5db2781-08fa-439c-8809-90e1a6fd40f2)
+
+![tela7](https://github.com/user-attachments/assets/674a2e4e-975e-45f0-9368-59797f70c614)
 
 
 #Link do swagger
