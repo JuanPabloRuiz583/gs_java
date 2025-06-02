@@ -36,7 +36,7 @@ A documentação interativa está disponível via Swagger em  http://localhost:8
 - **Usuário:** Cadastro, autenticação e gerenciamento.
 - **Alerta:** Cadastro de alertas de risco pelo usuario ,CRUD completo.
 - **Abrigo:** Cadastro e consulta de abrigos, CRUD completo.
-- **Rota Segura:** Cadastro e consulta de rotas seguras, CRUD completo.
+- **Rota Segura:** Cadastro e consulta de rotas seguras com base no alerta e abrigo criado, CRUD completo.
 
 
 ## 🏁 Como rodar
@@ -75,7 +75,7 @@ passo 5: ao clicar no cadeado, cole o token que voce copiou e clique em authoriz
 
 ![passo5](https://github.com/user-attachments/assets/85c4e2ca-6ecc-438c-b327-c912738bc10f)
 
-passo 6: apos isso clique no x , para fechar a janela e volte para a tela principal(voce ira perceber que o cadeado em todas as requisçoes fechou, é sinal que deu certo), sendo assim se voce digitou o token certo todos os endpoints da api estarao liberados para voce testar
+passo 6: apos isso clique no x , para fechar a janela e volte para a tela principal(voce ira perceber que o cadeado em todas as requisiçoes fechou, é sinal que deu certo), sendo assim se voce digitou o token certo todos os endpoints da api estarao liberados para voce testar
 
 ![tela6](https://github.com/user-attachments/assets/f5db2781-08fa-439c-8809-90e1a6fd40f2)
 
