@@ -55,7 +55,7 @@ A documentação interativa está disponível via Swagger em  http://localhost:8
 
 ## Instruções para acesso e testes
 
-passo 1: Ao rodar todos os endpoints estaram bloqueados exeto o de cadastro de usuarios e de login. Comece cadastrando o usuario, va no post user e crie um usuario:
+passo 1: Ao rodar a aplicação e acessar o swagger, todos os endpoints estaram bloqueados exeto o de cadastro de usuarios e de login. Comece cadastrando o usuario, va no post user e crie um usuario:
 
 ![passo1](https://github.com/user-attachments/assets/64beda73-7d3f-4b51-af10-ab31a938d4e8)
 
