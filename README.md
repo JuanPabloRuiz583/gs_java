@@ -19,6 +19,9 @@ Com o aumento de eventos extremos como enchentes, deslizamentos e incêndios, o 
 - Maven
 - Banco de Dados Relacional (PostgreSQL)
 - Swagger/OpenAPI
+- Spring Data JPA
+- Lombok
+- Busca de abrigos com paginação, filtro e ordenação
 
 ## 🔒 Autenticação
 
@@ -39,16 +42,16 @@ A documentação interativa está disponível via Swagger em  http://localhost:8
 ## 🏁 Como rodar
 
 1. Clone o repositório:
-   ```bash
+  ` ``bash
    git clone https://github.com/JuanPabloRuiz583/gs_java.git
 
-2.Instale as dependências e gere o build:
-
+2. Instale as dependências e gere o build:
+  ` ``bash
    mvn clean install
 
 3.Execute o projeto:
-
-mvn spring-boot:run
+ ` ``bash
+  mvn spring-boot:run
    
 
 
