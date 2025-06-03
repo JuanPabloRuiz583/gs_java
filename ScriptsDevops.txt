@@ -1,0 +1,10 @@
+APOS TER DADO O BUILD EXECUTAR:
+
+1- docker run -d --name postgres_container -e POSTGRES_PASSWORD=12345 -e POSTGRES_DB=saferoute -p 5432:5432 -v pgdata:/var/lib/postgresql/data postgres:15
+
+
+2-docker run -d --name gs_app --link postgres_container -p 8080:8080 `
+-e SPRING_DATASOURCE_URL=jdbc:postgresql://postgres_container:5432/saferoute `
+-e SPRING_DATASOURCE_USERNAME=postgres `
+-e SPRING_DATASOURCE_PASSWORD=12345 `
+gs-apiteste:1.0
