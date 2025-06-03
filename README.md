@@ -79,8 +79,16 @@ passo 6: apos isso clique no x , para fechar a janela e volte para a tela princi
 
 ![tela6](https://github.com/user-attachments/assets/f5db2781-08fa-439c-8809-90e1a6fd40f2)
 
+![tela7](https://github.com/user-attachments/assets/674a2e4e-975e-45f0-9368-59797f70c614)
 
-## Integrantes
+
+
+## Link do swagger
+
+ http://localhost:8080/swagger-ui.html
+
+
+ ## Integrantes
 
 Barbara Dias Santos rm: 556974
 
@@ -88,10 +96,3 @@ Natasha Lopes Rocha Oliveira rm: 554816
 
 Juan Pablo Ruiz de Souza rm: 557727
 
-
-![tela7](https://github.com/user-attachments/assets/674a2e4e-975e-45f0-9368-59797f70c614)
-
-
-#Link do swagger
-
- http://localhost:8080/swagger-ui.html
