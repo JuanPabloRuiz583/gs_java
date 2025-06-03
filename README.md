@@ -83,6 +83,60 @@ passo 6: apos isso clique no x , para fechar a janela e volte para a tela princi
 
 
 
+
+
+## Instruções de Teste da API
+
+1. **Crie um usuário e faça login** para obter o token JWT.
+2. **Inclua o token JWT** no cabeçalho `Authorization` das requisições protegidas.
+
+### Endpoints Principais
+
+- **Usuários (`/users`)**:  
+  - Cadastro exige nome, e-mail único e válido, senha e role (`ADMIN` ou `USER`).  
+  - Senha é criptografada.  
+  - Listagem e busca por ID disponíveis.
+
+- **Login (`/login`)**:  
+  - Envie `email` e `password` para receber o token JWT.  
+  - E-mail deve existir e senha estar correta.
+
+- **Abrigos (`/abrigos`)**:  
+  - Listagem com paginação, filtro e ordenação.  
+  - Cadastro, edição e remoção exigem dados válidos.
+
+- **Alertas (`/alertas`)** e **Rotas Seguras (`/rotas-seguras`)**:  
+  - Listagem, busca por ID, cadastro, edição e remoção.  
+  - Campos obrigatórios validados automaticamente.
+
+
+## Regras de Negócio e Validações Específicas
+
+### Usuários (`/users`)
+- **E-mail deve ser único:** Não é permitido cadastrar dois usuários com o mesmo e-mail. Tentativas retornam erro 400.
+- **E-mail válido:** O campo de e-mail deve seguir o formato correto.
+- **Senha obrigatória:** Não é possível criar usuário sem senha.
+- **Role obrigatória:** O campo `role` deve ser `ADMIN` ou `USER`.
+- **Senha criptografada:** As senhas são armazenadas de forma segura.
+- **Campos obrigatórios:** Nome, e-mail, senha e role são obrigatórios.
+
+### Abrigos, Alertas e Rotas Seguras
+- **Campos obrigatórios:** Todos os campos marcados como obrigatórios nos DTOs devem ser preenchidos.
+- **Validações automáticas:** Utilização de `@Valid` para garantir integridade dos dados.
+- **Paginação e filtros:** Endpoints de listagem aceitam parâmetros para paginação, ordenação e filtro por nome (somente o abrigo).
+
+---
+### Observações
+
+- Todos os endpoints protegidos exigem autenticação JWT.
+- Campos obrigatórios ou inválidos retornam erro 400.
+- Remoções bem-sucedidas retornam 204.
+- Teste a API via `/swagger-ui.html`.
+
+**Observação:** Qualquer violação das regras de negócio ou validação retorna erro 400 (Bad Request) com mensagem explicativa.
+
+
+
 ## Link do swagger
 
  http://localhost:8080/swagger-ui.html
