@@ -14,8 +14,6 @@ public class SwaggerConfig {
     public OpenAPI customOpenAPI() {
         final String securitySchemeName = "bearerAuth";
         return new OpenAPI()
-                .addServersItem(new Server().url("http://localhost:8080"))
-                .addServersItem(new Server().url("https://gsjava-production-c327.up.railway.app"))
                 .addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
                 .components(new io.swagger.v3.oas.models.Components()
                         .addSecuritySchemes(securitySchemeName,
