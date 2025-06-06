@@ -135,6 +135,22 @@ passo 6: apos isso clique no x , para fechar a janela e volte para a tela princi
 
 **Observação:** Qualquer violação das regras de negócio ou validação retorna erro 400 (Bad Request) com mensagem explicativa.
 
+## JSON DE CADA ENTIDADE
+
+## user
+![postuser](https://github.com/user-attachments/assets/33b2af5e-4b8c-4b13-85cd-59a4fb315245)
+
+
+## alertas
+![postalerta](https://github.com/user-attachments/assets/eacbe29d-7334-49bc-81f6-9bd3b3bf7594)
+
+
+## abrigos
+![postabrigo](https://github.com/user-attachments/assets/e5c0063e-f3d2-4d60-ad3f-f15d8cd3ff71)
+
+
+## rotas seguras
+![rotasseguraspost](https://github.com/user-attachments/assets/0699bf19-7cab-48ab-a282-19a0c4366fb2)
 
 
 ## Link do swagger
