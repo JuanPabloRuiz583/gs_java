@@ -1,3 +1,17 @@
+Script usado para criar a maquina virtual:
+
+1 - az group create -l eastus -n rg-vm-global
+
+2 - az vm create --resource-group rg-vm-global --name vm-global --image Canonical:ubuntu-24_04-lts:minimal:24.04.202505020 --size Standard_B2s --admin-username admin_fiap --admin-password admin_fiap@123
+
+3 - az network nsg rule create --resource-group rg-vm-global --nsg-name vm-globalNSG --name port_8080 --protocol tcp --priority 1010 --destination-port-range 8080
+
+4 - az network nsg rule create --resource-group rg-vm-global --nsg-name vm-globalNSG --name port_80 --protocol tcp --priority 1020 --destination-port-range 80
+
+
+
+
+
 APOS TER DADO O BUILD EXECUTAR:
 
 1- docker run -d --name postgres_container -e POSTGRES_PASSWORD=12345 -e POSTGRES_DB=saferoute -p 5432:5432 -v pgdata:/var/lib/postgresql/data postgres:15
